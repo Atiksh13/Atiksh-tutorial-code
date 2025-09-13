@@ -5,23 +5,23 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
-@TeleOp(name = "atiksh  mecanumm drive")
+@TeleOp(name = " mecanumm drive")
 public class meccunamdrive extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {
 
-        // Variables for mecanum wheel drive - power
+        // Variables for mechanic wheel drive - power
 
         double fleftpower,frightpower,bleftpower,brightpower;
         double drive,turn,strafe;
 
-        DcMotor frontright = hardwareMap.get(DcMotor.class, "rightFront");
-        DcMotor frontleft =   hardwareMap.get(DcMotor.class,"leftFront");
-        DcMotor backright = hardwareMap.get(DcMotor.class, "rightBack");
-        DcMotor backleft =   hardwareMap.get(DcMotor.class,"leftBack");
+        DcMotor frontright = hardwareMap.get(DcMotor.class, "frontright");
+        DcMotor frontleft =   hardwareMap.get(DcMotor.class,"frontleft");
+        DcMotor backright = hardwareMap.get(DcMotor.class, "backright");
+        DcMotor backleft =   hardwareMap.get(DcMotor.class,"backleft");
 
+        backright.setDirection(DcMotorSimple.Direction.REVERSE);
         frontleft.setDirection(DcMotorSimple.Direction.REVERSE);
-        backleft.setDirection(DcMotorSimple.Direction.REVERSE);
 
 
         waitForStart();

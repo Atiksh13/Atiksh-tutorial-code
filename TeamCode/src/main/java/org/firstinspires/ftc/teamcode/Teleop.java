@@ -3,8 +3,9 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.hardware.Gamepad;
 
-@TeleOp(name="Atiksh tankdrive v2")
+@TeleOp(name="Atiksh rev starter bot ")
 public class Teleop extends LinearOpMode {
 
     @Override
@@ -12,41 +13,47 @@ public class Teleop extends LinearOpMode {
 
         double Drive;
         double turn;
-        double reverse;
-        double armm;
+       // double intakepower;
         double rightsidepower, leftsidepower;
+       // double shootpower;
 
 
         DcMotor right = hardwareMap.get(DcMotor.class, "right");
         DcMotor left = hardwareMap.get(DcMotor.class, "left");
-        DcMotor arm = hardwareMap.get(DcMotor.class, "arm");
+        //DcMotor intake = hardwareMap.get(DcMotor.class, "intake");
+        //DcMotor shoot =hardwareMap.get(DcMotor.class,"shoot");
+        telemetry.addData("Status","initialized");
+
 
 
         left.setDirection(DcMotorSimple.Direction.REVERSE);
-        //right.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        //left.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        //arm.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
 
         waitForStart();
 
         while (opModeIsActive()) {
 
 
-            Drive = gamepad1.right_trigger;
-            reverse = gamepad1.left_trigger;
-            turn = gamepad1.right_stick_x;
-            //armm = gamepad1.left_stick_y;
+            Drive = gamepad1.left_stick_y;
 
-            rightsidepower = Drive - reverse - turn;
-            leftsidepower = Drive - reverse + turn;
+            turn = gamepad1.left_stick_x;
+            //intakepower = gamepad1.left_trigger;
+            //shootpower=gamepad1.right_trigger;
+
+
+
+            rightsidepower = Drive - turn;
+            leftsidepower = Drive  + turn;
 
 
             rightsidepower = Math.max(-1.0, Math.min(1.0, rightsidepower));
             leftsidepower = Math.max(-1.0, Math.min(1.0, leftsidepower));
 
+
             right.setPower(rightsidepower);
             left.setPower(leftsidepower);
-            //arm.setPower(armm);
+            //intake.setPower(intakepower);
+            //shoot.setPower(shootpower);
 
         }
 

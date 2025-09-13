@@ -6,17 +6,33 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 @TeleOp(name = "buttonTestV1")
 public class motorTestButton extends OpMode {
     private DcMotor motor1;
+    double speed= 0;
     @Override
     public void init() {
-        DcMotor motor1 = hardwareMap.get(DcMotor.class,"motor1");
+        motor1 = hardwareMap.get(DcMotor.class,"motor1");
 
+        telemetry.addLine("press A for clockwise");
+        telemetry.addLine("press B for Anti-clockwise");
+        telemetry.addLine("press nothing for stop");
     }
 
     @Override
     public void loop() {
+        telemetry.addLine("press A for clockwise");
+        telemetry.addLine("press B for Anti-clockwise");
+        telemetry.addLine("press nothing for stop");
 
-    motor1.setPower(gamepad1.left_stick_y);
+    motor1.setPower(speed);
+    if (gamepad1.a){
+        speed = 1;
+        motor1.setPower(speed);
 
+    }
+    if (gamepad1.b){
+        speed = -1;
+        motor1.setPower(speed);
+    }
 
+        telemetry.addData("motor position", speed);
     }
 }
